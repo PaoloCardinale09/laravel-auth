@@ -8,12 +8,15 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{ config('app.name', 'Laravel') }} | @yield('title')</title>
 
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+
+    {{-- BS ICONS --}}
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.4/font/bootstrap-icons.css">
 
     <!-- Usando Vite -->
     @vite(['resources/js/app.js'])
@@ -49,7 +52,7 @@
                             <a class="nav-link" href="{{route('dashboard') }}">{{ __('Home') }}</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{route('admin.projects.index') }}">{{ __('Project') }}</a>
+                            <a class="nav-link" href="{{route('admin.projects.index') }}">{{ __('Projects') }}</a>
                         </li>
                     </ul>
                     
@@ -91,7 +94,8 @@
             </div>
         </nav>
 
-        <main class="">
+        <main class="container">
+            <h1 class="my-5 text-center text-primary"> @yield('title')</h1>
             @yield('content')
         </main>
     </div>

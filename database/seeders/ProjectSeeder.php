@@ -20,7 +20,7 @@ class ProjectSeeder extends Seeder
             $project->name = $faker->word();
             $project->technology = $faker->word();
             $project->url = $faker->url();
-            $project->image = $faker->imageUrl(640, 480, 'animals', true);
+            $project->image = 'https://picsum.photos/400/300';
 
             $project->save();
         }
