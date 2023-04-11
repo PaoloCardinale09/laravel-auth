@@ -18,6 +18,7 @@
                     @endif
 
                     {{ __('You are logged in!') }}
+                    Benvenuto
                 </div>
             </div>
         </div>
