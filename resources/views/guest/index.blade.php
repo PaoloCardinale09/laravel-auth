@@ -32,7 +32,7 @@
                 <td>{{ $project->technology }}</td>
                 <td>
                     <a href=" {{ route('admin.projects.show', $project) }} "><i class="bi bi-eye"></i></a>
-                    <a href=" {{ route('admin.projects.edit', $project) }} "><i class="bi bi-pencil"></i></a>
+                    <a href=" {{ route('admin.projects.show', $project) }} "><i class="bi bi-pencil"></i></a>
                     <a href=" {{ route('admin.projects.show', $project) }} "><i class="bi bi-trash"></i></a>
                 </td>
                 
