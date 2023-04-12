@@ -2,6 +2,12 @@
 
 
 @section('title', 'Projects')
+
+@section('actions')
+<a href="  {{ route('admin.projects.create') }}">
+    <div class="btn btn-primary">Add new Project</div>
+</a>
+@endsection
     
 
 @section('content')

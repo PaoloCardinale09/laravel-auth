@@ -1,5 +1,11 @@
 @extends('layouts.app')
 
+@section('actions')
+<a href="  {{ route('admin.projects.index') }}">
+    <div class="btn btn-primary">Go to Projects</div>
+</a>
+@endsection
+
 @section('content')
 <div class="container">
     <h2 class="fs-4 text-secondary my-4">

@@ -18,6 +18,7 @@ class ProjectSeeder extends Seeder
         for($i=0; $i < 40; $i++){
             $project = new Project;
             $project->name = $faker->word();
+            $project->description = $faker->paragraphs(2, true);
             $project->technology = $faker->word();
             $project->url = $faker->url();
             $project->image = 'https://picsum.photos/400/300';
