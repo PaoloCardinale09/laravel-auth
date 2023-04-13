@@ -1,4 +1,4 @@
-@extends('layouts.app')
+{{-- @extends('layouts.app')
 
 @section('title', 'Edit :'. $project->name)
     
@@ -8,7 +8,11 @@
 </a>
 @endsection
 
+
 @section('content')
+
+  @include('layouts.partials.errors')
+
     <section class="card">
         <div class="card-body">
           <form action=" {{ route('admin.projects.update', $project)}} " method="POST" class="row">
@@ -50,4 +54,4 @@
 
     </section>
     
-@endsection
+@endsection --}}

@@ -18,7 +18,7 @@
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annulla</button>
 
-          <form action="{{ route('projects.destroy', $project) }}" method="POST" class="">
+          <form action="{{ route('admin.projects.destroy', $project) }}" method="POST" class="">
             @method('DELETE')
             @csrf
 

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Project;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class ProjectController extends Controller
 {
@@ -15,6 +16,7 @@ class ProjectController extends Controller
     {
         $projects = Project::paginate(10);
         return view('admin.projects.index', compact('projects'));
+        
     }
 
     /**
@@ -22,8 +24,8 @@ class ProjectController extends Controller
      */
     public function create()
     {
-       
-        return view('admin.projects.create');
+        $project = new Project;
+        return view('admin.projects.form', compact('project'));
     }
 
     /**
@@ -31,7 +33,23 @@ class ProjectController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request->all());
+        $request->validate([
+            'name' => 'required|string|max:50',
+            'technology' => 'required|string|max:50',
+            'description' => 'required|string|max:1000',
+            'url'=> 'url|max:100',
+            'image' => 'string'
+        ],
+        [
+            'name.required' => 'Il nome del progetto è obbligatorio',  
+            'name.max' => 'Il nome può avere massimo 50 caratteri',   
+            'technology.required' => 'La tecnologia utilizzata è obbligatoria',    
+            'technology.max' => 'Le tecnologie utilizzate possono avere massimo 50 caratteri',
+            'description.required' => 'La descrizione è obbligatoria',
+            'description.max' => 'La descrizione può avere un massimo di 1000 caratteri',
+            'url.url'=> 'Deve essere un link valido',
+            'url.max'=> 'L\' URL può avere un massimo di 100 caratteri'
+        ]);
 
         $project = new Project;
         $project->fill($request->all());
@@ -52,7 +70,7 @@ class ProjectController extends Controller
      */
     public function edit(Project $project)
     {
-        return view('admin.projects.edit', compact('project'));
+        return view('admin.projects.form', compact('project'));
     }
 
     /**

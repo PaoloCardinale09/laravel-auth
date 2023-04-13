@@ -44,6 +44,7 @@
 
     </main>
 
+    @yield('modal')
 </body>
 
 </html>
