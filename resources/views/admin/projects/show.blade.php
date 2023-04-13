@@ -21,7 +21,7 @@
 
 <section class="d-flex">
     <div>
-        <img src=" {{ $project->image }} " alt="">
+        <img src=" {{ $project->getImageUri() }}  " alt="" class="img-fluid">
     </div>
     <div class="px-5">
         <h3 class="pb-3 text-dark"> Used technologies: <br> <i class="text-muted">

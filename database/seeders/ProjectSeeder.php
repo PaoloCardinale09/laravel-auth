@@ -21,7 +21,7 @@ class ProjectSeeder extends Seeder
             $project->description = $faker->paragraphs(2, true);
             $project->technology = $faker->word();
             $project->url = $faker->url();
-            $project->image = 'https://picsum.photos/400/300';
+            // $project->image = 'https://picsum.photos/400/300';
 
             $project->save();
         }

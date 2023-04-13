@@ -11,7 +11,7 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body text-start">
-          Sei sicuro di voler eliminare la pasta {{ $project->name }} N° {{ $project->number }} con ID
+          Sei sicuro di voler eliminare il Project {{ $project->name }}  con ID
           {{ $project->id }}? <br>
           L'operazione non è reversibile
         </div>

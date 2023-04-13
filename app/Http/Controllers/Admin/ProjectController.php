@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Project;
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 
 class ProjectController extends Controller
@@ -38,7 +40,7 @@ class ProjectController extends Controller
             'technology' => 'required|string|max:50',
             'description' => 'required|string|max:1000',
             'url'=> 'url|max:100',
-            'image' => 'string'
+            'image' => 'nullable|image|mimes:jpg,png,jpeg'
         ],
         [
             'name.required' => 'Il nome del progetto è obbligatorio',  
@@ -48,13 +50,23 @@ class ProjectController extends Controller
             'description.required' => 'La descrizione è obbligatoria',
             'description.max' => 'La descrizione può avere un massimo di 1000 caratteri',
             'url.url'=> 'Deve essere un link valido',
-            'url.max'=> 'L\' URL può avere un massimo di 100 caratteri'
+            'url.max'=> 'L\' URL può avere un massimo di 100 caratteri',
+            'image.image' => 'Il file caricato deve essere un\' immagine',
+            'image.mimes' => 'Le estensione consentite per l\'immagine sono: jpg,png,jpeg'
         ]);
 
+        $data = $request->all();
+
+        if (Arr::exists($data, 'image')) {
+           $path =  Storage::put('uploads/project', $data['image']);
+           $data['image'] = $path;
+        }
+
         $project = new Project;
-        $project->fill($request->all());
+        $project->fill($data);
         $project->save();
-        return to_route('admin.projects.show', $project);
+        return to_route('admin.projects.show', $project)
+            ->with('message_content', "Project $project->id creato con successo");
     }
 
     /**
@@ -83,7 +95,7 @@ class ProjectController extends Controller
             'technology' => 'required|string|max:50',
             'description' => 'required|string|max:1000',
             'url'=> 'url|max:100',
-            'image' => 'string'
+            'image' => 'nullable|image|mimes:jpg,png,jpeg'
         ],
         [
             'name.required' => 'Il nome del progetto è obbligatorio',  
@@ -93,9 +105,22 @@ class ProjectController extends Controller
             'description.required' => 'La descrizione è obbligatoria',
             'description.max' => 'La descrizione può avere un massimo di 1000 caratteri',
             'url.url'=> 'Deve essere un link valido',
-            'url.max'=> 'L\' URL può avere un massimo di 100 caratteri'
+            'url.max'=> 'L\' URL può avere un massimo di 100 caratteri',
+            'image.image' => 'Il file caricato deve essere un\' immagine',
+            'image.mimes' => 'Le estensione consentite per l\'immagine sono: jpg,png,jpeg'
         ]);
+
+
         $data = $request->all();
+
+        if (Arr::exists($data, 'image')) {
+          if($project->image) Storage::delete($project->image);
+          $path =  Storage::put('uploads/project', $data['image']);
+          $data['image'] = $path;
+        }
+
+
+        $data = $data;
         $project->update($data);
         return redirect()->route('admin.projects.show', $project);
     }
@@ -105,6 +130,7 @@ class ProjectController extends Controller
      */
     public function destroy(Project $project)
     {
+      if($project->image) Storage::delete($project->image);
         $project->delete();
         return redirect()->route('admin.projects.index');
     }

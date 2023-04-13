@@ -16,11 +16,11 @@
         <div class="card-body py-4">
 
           @if ($project->id)
-            <form action=" {{ route('admin.projects.update', $project)}} " method="POST" class="row">
+            <form action=" {{ route('admin.projects.update', $project)}} " method="POST" class="row" enctype="multipart/form-data">
               @method('PUT')
               
           @else
-            <form action=" {{ route('admin.projects.store')}} " method="POST" class="row">
+            <form action=" {{ route('admin.projects.store')}} " method="POST" class="row" enctype="multipart/form-data">
           @endif
 
             @csrf
@@ -73,7 +73,7 @@
                 <label class="form-label" for="image">Image</label>
               </div>
               <div class="col-8 mb-3">
-                <input class="form-control @error('image')is-invalid @enderror" type="text" name="image" id="image" value=" {{ old('image', $project->image) }}"/>
+                <input class="form-control @error('image')is-invalid @enderror" type="file" name="image" id="image" />
                 @error('image')
                 <div class="invalid-feedback">
                   {{ $message }}
@@ -81,7 +81,7 @@
                 @enderror
               </div>
               <div class="col-2 mb-3">
-                <img src=" {{ old('image', $project->image) }} " alt="" class="img-fluid">
+                <img src=" {{ $project->getImageUri() }} " alt="" class="img-fluid">
               </div>
             </div>
             
