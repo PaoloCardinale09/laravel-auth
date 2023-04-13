@@ -4,9 +4,15 @@
     
 
 @section('actions')
-<a href="  {{ route('admin.projects.index') }}">
-    <div class="btn btn-primary">Go back</div>
-</a>
+<div>
+
+    <a href="  {{ route('admin.projects.index') }}">
+        <div class="btn btn-primary mx-1">Go back</div>
+    </a>
+    <a href="  {{ route('admin.projects.edit', $project) }}">
+        <div class="btn btn-primary mx-1">Edit</div>
+    </a>
+</div>
 @endsection
 
 

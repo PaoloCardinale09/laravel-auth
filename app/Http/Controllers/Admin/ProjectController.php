@@ -78,6 +78,23 @@ class ProjectController extends Controller
      */
     public function update(Request $request, Project $project)
     {
+        $request->validate([
+            'name' => 'required|string|max:50',
+            'technology' => 'required|string|max:50',
+            'description' => 'required|string|max:1000',
+            'url'=> 'url|max:100',
+            'image' => 'string'
+        ],
+        [
+            'name.required' => 'Il nome del progetto è obbligatorio',  
+            'name.max' => 'Il nome può avere massimo 50 caratteri',   
+            'technology.required' => 'La tecnologia utilizzata è obbligatoria',    
+            'technology.max' => 'Le tecnologie utilizzate possono avere massimo 50 caratteri',
+            'description.required' => 'La descrizione è obbligatoria',
+            'description.max' => 'La descrizione può avere un massimo di 1000 caratteri',
+            'url.url'=> 'Deve essere un link valido',
+            'url.max'=> 'L\' URL può avere un massimo di 100 caratteri'
+        ]);
         $data = $request->all();
         $project->update($data);
         return redirect()->route('admin.projects.show', $project);
@@ -91,4 +108,6 @@ class ProjectController extends Controller
         $project->delete();
         return redirect()->route('admin.projects.index');
     }
+
+
 }
